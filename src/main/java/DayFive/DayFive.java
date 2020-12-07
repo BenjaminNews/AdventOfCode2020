@@ -8,56 +8,23 @@ public class DayFive {
 
     private static final int allRows = 127;
 
-
+    private static List<Integer> allSeats = new ArrayList<Integer>();
 
     public int partOne(String input) {
-        int row = binarySearchRow(input.substring(0, 7));
-        int column = binarySearchColumn(input.substring(7, 10));
-        return (row * 8) + column;
-    }
-
-    private int binarySearchColumn(String data) {
-        int maxColumnRange = 7;
-        int minColumnRange = 0;
-        for (String s : data.split("")) {
-            int diff = maxColumnRange - minColumnRange;
-            if (s.equals("L")) {
-                maxColumnRange -= Math.ceil(diff / 2.0);
-            } else if (s.equals("R")) {
-                minColumnRange += diff / 2;
-            }
-        }
-        return maxColumnRange;
-    }
-
-    private int binarySearchRow(String data) {
-        int maxRowRange = 127;
-        int minRowRange = 0;
-        for (String s : data.split("")) {
-            int diff = maxRowRange - minRowRange;
-            if (s.equals("F") || s.equals("L")) {
-                maxRowRange -= Math.ceil(diff / 2.0);
-            } else if (s.equals("B") || s.equals("R")) {
-                minRowRange += diff / 2;
-            }
-        }
-        return maxRowRange;
-    }
-
-    public static void main(String[] args) {
-        DayFive dayFive = new DayFive();
-        List<Integer> allSeats = new ArrayList<Integer>();
-
-        int highestSeatID = Integer.MIN_VALUE;
-
+        int maxValue = Integer.MIN_VALUE;
         for(String s : input.split("\n")) {
-            int seatId = dayFive.partOne(s);
-            allSeats.add(seatId);
-            if (seatId > highestSeatID) {
-                highestSeatID = seatId;
+            int row = binarySearch(s.substring(0, 7), 127);
+            int column = binarySearch(s.substring(7, 10), 7);
+            int seatValue = (row * 8) + column;
+            if(seatValue > maxValue) {
+                maxValue = seatValue;
             }
+            allSeats.add(seatValue);
         }
-        System.out.printf("Part one: %d\n", highestSeatID);
+        return maxValue;
+    }
+
+    public int partTwo() {
         Collections.sort(allSeats);
 
         int mySeat = Integer.MIN_VALUE;
@@ -65,13 +32,31 @@ public class DayFive {
         for(int i = 1; i < allSeats.size(); i++) {
             int nextSeatValue = allSeats.get(i);
             if(nextSeatValue != minimumSeatValue + 1) {
-                mySeat = minimumSeatValue + 1;
-                break;
+                return minimumSeatValue + 1;
             }
             minimumSeatValue = nextSeatValue;
         }
-        System.out.printf("Part two: %d\n", mySeat);
+        return mySeat;
+    }
 
+    private int binarySearch(String data, int range) {
+        int minRange = 0;
+        Collections.sort(allSeats);
+        for (String s : data.split("")) {
+            int diff = range - minRange;
+            if (s.equals("F") || s.equals("L")) {
+                range -= Math.ceil(diff / 2.0);
+            } else if (s.equals("B") || s.equals("R")) {
+                minRange += diff / 2;
+            }
+        }
+        return range;
+    }
+
+    public static void main(String[] args) {
+        DayFive dayFive = new DayFive();
+        System.out.printf("Part one: %d\n", dayFive.partOne(input));
+        System.out.printf("Part two: %d", dayFive.partTwo());
     }
 
     private static final String input = "BFBBBFBLRR\n" +
