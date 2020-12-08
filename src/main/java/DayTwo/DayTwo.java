@@ -56,7 +56,7 @@ public class DayTwo {
     }
 
     private int getValueTwo(String line) {
-        return Integer.parseInt(line.split("-")[1].split(" ")[0].replace(":", "").trim());
+        return Integer.parseInt(line.split(" ")[0].split("-")[1].trim());
     }
 
     private int getValueOne(String line) {
