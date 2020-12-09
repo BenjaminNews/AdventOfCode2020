@@ -48,7 +48,6 @@ public class DayEight {
             } else {
                 continue;
             }
-            System.out.println(start + " -> " + Arrays.toString(commands));
             for (int i = 0; i < commands.length; ) {
                 if (!performedInstractions.contains(i)) {
                     performedInstractions.add(i);

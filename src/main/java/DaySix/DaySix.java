@@ -32,7 +32,7 @@ public class DaySix {
         System.out.printf("Part two: %d\n", daySix.partTwo(input));
     }
 
-    private static String input = "qzbw\n" +
+    private static final String input = "qzbw\n" +
                                     "qez\n" +
                                     "\n" +
                                     "xgedfibnyuhqsrazlwtpocj\n" +
@@ -2271,5 +2271,4 @@ public class DaySix {
                                     "kfgjvru\n" +
                                     "jukfrv\n" +
                                     "kvfujr";
-
 }

@@ -10,7 +10,7 @@ public class DayFour {
 
     private final List<String> validKeys = Arrays.asList("hcl", "iyr", "hgt", "pid", "byr", "eyr", "ecl");
 
-    public int getValidPassportCount(String input) {
+    public int partOne(String input) {
         validCount = 0;
         for(String passportData : input.split("\n\n")) {
             if(passportData.contains("byr:") && passportData.contains("iyr:") && passportData.contains("eyr:")
@@ -22,7 +22,7 @@ public class DayFour {
         return validCount;
     }
 
-    public int getValidPassportCountPartTwo(String input) {
+    public int partTwo(String input) {
         validCount = 0;
         Arrays.stream(input.toString().split(System.lineSeparator() + System.lineSeparator())).forEach(s -> {
             s = s.replace(System.lineSeparator(), " ");
@@ -91,8 +91,8 @@ public class DayFour {
 
     public static void main(String[] args) {
         DayFour dayFour = new DayFour();
-        System.out.println("Part one: " + dayFour.getValidPassportCount(input));
-        System.out.println("Part one: " + dayFour.getValidPassportCountPartTwo(input));
+        System.out.println("Part one: " + dayFour.partOne(input));
+        System.out.println("Part one: " + dayFour.partTwo(input));
     }
 
     private static final String input = "ecl:#eef340 eyr:2023 hcl:#c0946f pid:244684338 iyr:2020 cid:57 byr:1969 hgt:152cm\n" +

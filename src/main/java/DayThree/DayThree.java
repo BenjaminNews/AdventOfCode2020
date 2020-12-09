@@ -20,34 +20,29 @@ public class DayThree {
             }
             slope[i] = insertData.toCharArray();
         }
-
-//        for(char[] c: slope) {
-//            System.out.println(Arrays.toString(c).replace(", ", ""));
-//        }
-
         int collisions = 0;
 
         for(int currentLevel = 0, currentRow = 0; currentLevel < slope.length; currentLevel += dropSize, currentRow += stepSize) {
-
             if(slope[currentLevel][currentRow] == '#') {
                 collisions++;
             }
         }
-
         return collisions;
+    }
+
+    public long partTwo() {
+        long testOne =  partOne(input, 1, 1);
+        long testTwo =  partOne(input, 3, 1);
+        long testThree =  partOne(input, 5, 1);
+        long testFour =  partOne(input, 7, 1);
+        long testFive =  partOne(input, 1, 2);
+        return testOne * testTwo * testThree * testFour * testFive;
     }
 
     public static void main(String[] args) {
         DayThree dayThree = new DayThree();
         System.out.printf("Part One: %d", dayThree.partOne(input, 3, 1));
-
-        long testOne =  dayThree.partOne(input, 1, 1);
-        long testTwo =  dayThree.partOne(input, 3, 1);
-        long testThree =  dayThree.partOne(input, 5, 1);
-        long testFour =  dayThree.partOne(input, 7, 1);
-        long testFive =  dayThree.partOne(input, 1, 2);
-
-        System.out.printf("\nPart Two: %d", (testOne * testTwo * testThree * testFour * testFive));
+        System.out.printf("\nPart Two: %d", dayThree.partTwo());
     }
 
     private static final String input = "....#...............#.#..###.##\n" +
