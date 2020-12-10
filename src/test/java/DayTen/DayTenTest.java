@@ -20,8 +20,13 @@ public class DayTenTest {
     }
 
     @Test
-    public void givenInputTwo_returns_35() {
-        assertEquals(220, dayTen.partOne(inputTwo, 1, 3));
+    public void givenInputTwo_returns_8() {
+        assertEquals(8, dayTen.partTwo(inputOne));
+    }
+
+    @Test
+    public void givenInputTwo_returns_19208() {
+        assertEquals(19208, dayTen.partTwo(inputTwo));
     }
 
     private static final String inputOne = "16\n" +

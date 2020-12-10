@@ -1,8 +1,13 @@
 package DayTen;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import org.paukov.combinatorics3.Generator;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 
 public class DayTen {
     public int partOne(String input, int valueOne, int valueTwo) {
@@ -24,9 +29,33 @@ public class DayTen {
         return conenctionCount;
     }
 
+
+    List<Integer> lines;
+    Map<Integer, Long> counter = new HashMap<>();
+
+    public long partTwo(String input) {
+        List<String> items = Arrays.asList(input.split("\n"));
+        lines = items.stream().map(Integer::parseInt).sorted(Comparator.naturalOrder()).collect(Collectors.toList());
+        lines.add(0, 0);
+        return checkBranch(0);
+    }
+
+    private long checkBranch(int i) {
+        if (i == (lines.size() - 1)) return 1;
+        if (counter.containsKey(i)) return counter.get(i);
+        long ans = 0;
+        for (int j = i + 1; j < lines.size(); j++) {
+            if (lines.get(j) - lines.get(i) > 3) break;
+            ans += checkBranch(j);
+        }
+        counter.put(i, ans);
+        return ans;
+    }
+
     public static void main(String[] args) {
         DayTen dayTen = new DayTen();
-        System.out.printf("Part one: %d", dayTen.partOne(input, 1, 3));
+        System.out.printf("Part one: %d\n", dayTen.partOne(input, 1, 3));
+        System.out.printf("Part two: %d\n", dayTen.partTwo(input));
     }
 
     private static final String input = "26\n" +
