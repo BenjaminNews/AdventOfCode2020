@@ -48,14 +48,4 @@ public class DayFifteenTest {
     public void givenInput_returns_1836() {
         assertEquals(1836, dayFifteen.partOne("3,1,2", 2020));
     }
-
-    @Test
-    public void givenInput_returns_175594() {
-        assertEquals(1836, dayFifteen.partOne("0,3,6", 30000000));
-    }
-
-    @Test
-    public void givenInput_returns_175594() {
-        assertEquals(1836, dayFifteen.partOne("0,3,6", 30000000));
-    }
 }
